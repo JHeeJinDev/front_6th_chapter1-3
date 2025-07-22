@@ -1,4 +1,3 @@
-/* eslint-disable react-refresh/only-export-components */
 import { createPortal } from "react-dom";
 import { Toast } from "./Toast";
 
