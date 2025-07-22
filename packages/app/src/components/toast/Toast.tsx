@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { useToastCommand, useToastState } from "./ToastProvider";
 import { PublicImage } from "../PublicImage";
 import type { ToastType } from "./toastReducer";
+import { useToast, useToastState } from "../../hooks/useToast";
 
 const Colors = {
   success: "bg-green-600",
@@ -17,8 +17,9 @@ const Icons: Record<ToastType, ReactNode> = {
 };
 
 export function Toast() {
-  const { type, message } = useToastState();
-  const { hide } = useToastCommand();
+  const { message, type } = useToastState();
+
+  const { hide } = useToast();
 
   const bg = Colors[type];
   const icon = Icons[type];

@@ -21,9 +21,8 @@ export const App = () => {
 
   return (
     <>
-      <ToastProvider>
-        <ModalProvider>{PageComponent ? <PageComponent /> : null}</ModalProvider>
-      </ToastProvider>
+      <ToastProvider />
+      <ModalProvider>{PageComponent ? <PageComponent /> : null}</ModalProvider>
       <CartInitializer />
     </>
   );
