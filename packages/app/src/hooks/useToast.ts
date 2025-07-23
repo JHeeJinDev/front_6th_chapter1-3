@@ -1,28 +1,28 @@
 import { useRef } from "react";
-import toastStore from "../stores/toast";
+import toastStore, { TOAST_ACTIONS } from "../stores/toast";
 import { useStore } from "@hanghae-plus/lib";
+import type { ToastState } from "../stores/toast";
 
 export const useToastState = () => {
-  const type = useStore(toastStore, (state) => state.type);
-  const message = useStore(toastStore, (state) => state.message);
-  const visible = useStore(toastStore, (state) => state.visible);
-
-  return { type, message, visible };
+  return useStore(toastStore, (state) => ({
+    type: state.type,
+    message: state.message,
+    visible: state.visible,
+  }));
 };
 
 export const useToast = () => {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  function show({ type, message }: { type: string; message?: string }) {
-    toastStore.dispatch({ type: "SHOW_TOAST", payload: { type, message } });
+  function show({ type, message }: { type: ToastState["type"]; message: string }) {
+    toastStore.dispatch({ type: TOAST_ACTIONS.SHOW_TOAST, payload: { type, message } });
 
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
     timeoutRef.current = setTimeout(() => {
-      console.log("asdasdadsaddaasd");
-      toastStore.dispatch({ type: "HIDE_TOAST" });
+      toastStore.dispatch({ type: TOAST_ACTIONS.HIDE_TOAST });
       timeoutRef.current = null;
     }, 3000);
   }
