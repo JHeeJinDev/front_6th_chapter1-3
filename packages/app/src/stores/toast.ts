@@ -39,7 +39,6 @@ const toastReducer = (state: typeof initialState, action: any) => {
   }
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toastStore = createStore(toastReducer, initialState);
 
 export default toastStore;
